@@ -62,7 +62,7 @@ PCA9685::PCA9685(uint8_t addr) {
 	
 	reset();
 	// Set to 50 hz for normal motor operation
-	setPWMFreq(55);
+	//setPWMFreq(55);
 	
 	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
 	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
@@ -76,10 +76,10 @@ PCA9685::~PCA9685() {
 // Resets the PCA9685 chip
 void PCA9685::reset() {
 	//write8(PCA9685_MODE1, 0x80);
-	if (read8(PCA9685_MODE1) & 0x80) {
-		write8(PCA9685_MODE1, 0x81);
-		time_sleep(0.01);
-	}
+	//if (read8(PCA9685_MODE1) & 0x80) {
+	//	write8(PCA9685_MODE1, 0x81);
+	//	time_sleep(0.01);
+	//}
 	write8(PCA9685_MODE1, 0x81);
 	time_sleep(.010);
 }
