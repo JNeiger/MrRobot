@@ -36,6 +36,9 @@ int main(int argc, char **argv)
 	// Set the motors to 0 so they don't randomly start moving when you turn it on
 	driveMotors[0].set(-.9);
 	driveMotors[1].set(0);
+	time_sleep(2);
+	driveMotors[0].set(-.9);
+	driveMotors[1].set(0);
 	
 	// Blocking call so this will wait until someone connects
 	bt.listenForClient();
