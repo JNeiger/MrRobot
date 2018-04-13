@@ -103,6 +103,8 @@ void PCA9685::setPWMFreq(float freq) {
 void PCA9685::setPWM(uint8_t channel, float duty) {
 	uint8_t val = std::min((uint8_t)floor(duty * 4095 + 0.5), (uint8_t)4095);
 	
+	printf("Val %d\n\rDuty %f\n\r", val, duty);
+	
 	if (val == 4095) {
 		setPWM(channel, 4096, 0);
 	} else if (val == 0) {
