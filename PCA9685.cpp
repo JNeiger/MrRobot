@@ -61,8 +61,13 @@ PCA9685::PCA9685(uint8_t addr) {
 	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
 	
 	reset();
+	
+	
+	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
+	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
+	
 	// Set to 50 hz for normal motor operation
-	//setPWMFreq(55);
+	setPWMFreq(55);
 	
 	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
 	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
@@ -97,10 +102,11 @@ void PCA9685::setPWMFreq(float freq) {
 	uint8_t oldmode = read8(PCA9685_MODE1);
 	uint8_t newmode = (oldmode & 0x7F) | 0x10; // Sleep
 	write8(PCA9685_MODE1, newmode);
+	time_sleep(.010);
 	write8(PCA9685_PRESCALE, prescale); // Set the clock scale
 	write8(PCA9685_MODE1, oldmode);
-	time_sleep(0.005);
-	write8(PCA9685_MODE1, oldmode | 0xA0); // Auto increment
+	time_sleep(.010);
+	write8(PCA9685_MODE1, oldmode | 0x20); // Auto increment
 }
 
 // Sets a PWM channel to have a certain duty cycle
