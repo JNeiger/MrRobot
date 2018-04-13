@@ -114,11 +114,11 @@ void PCA9685::setPWM(uint8_t channel, float duty) {
 
 // Sets a PWM channel to switch on and off on specific counts
 void PCA9685::setPWM(uint8_t channel, uint16_t on, uint16_t off) {
-	i2cWriteByte(i2cHandle, (unsigned char)(PWM0_ON_L + 4*channel));
-	i2cWriteByte(i2cHandle, (unsigned char)on);
-	i2cWriteByte(i2cHandle, (unsigned char)(on >> 8));
-	i2cWriteByte(i2cHandle, (unsigned char)off);
-	i2cWriteByte(i2cHandle, (unsigned char)(off >> 8));
+	unsigned char base = PWM0_ON_L + 4*channel;
+	i2cWriteByteData(i2cHandle, base, (unsigned char)on);
+	i2cWriteByteData(i2cHandle, base+1, (unsigned char)(on >> 8));
+	i2cWriteByteData(i2cHandle, base+2, (unsigned char)off);
+	i2cWriteByteData(i2cHandle, base+3, (unsigned char)(off >> 8));
 	
 	printf("Reg Offset 0x%02x\n\r", PWM0_ON_L + 4*channel);
 	printf("LED_ON_L 0x%02x\n\r", read8(PWM0_ON_L + 4*channel));
