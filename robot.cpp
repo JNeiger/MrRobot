@@ -1,5 +1,6 @@
 #include <cmath>
 #include <algorithm>
+#include <pigpio.h>
 #include "BluetoothServer.hpp"
 #include "PCA9685.hpp"
 #include "Motor.hpp"
