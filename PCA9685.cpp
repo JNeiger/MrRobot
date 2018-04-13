@@ -57,6 +57,8 @@ PCA9685::PCA9685(uint8_t addr) {
 		printf("Error opening the i2c device with error %d\n\r", i2cHandle);
 	}
 	
+	printf("State Register: %d\n\r", read8(0x00));
+	
 	reset();
 	// Set to 50 hz for normal motor operation
 	setPWMFreq(50);
