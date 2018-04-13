@@ -101,7 +101,7 @@ void PCA9685::setPWMFreq(float freq) {
 
 // Sets a PWM channel to have a certain duty cycle
 void PCA9685::setPWM(uint8_t channel, float duty) {
-	uint16_t val = std::min((uint16_t)floor(duty * 4095 + 0.5), (uint8_t)4095);
+	uint16_t val = std::min((uint16_t)floor(duty * 4095 + 0.5), (uint16_t)4095);
 	
 	printf("Val %d\n\rDuty %f\n\r", val, duty);
 	
