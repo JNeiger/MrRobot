@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	driveMotors[0].set(-.9);
 	driveMotors[1].set(0);
 	time_sleep(2);
-	driveMotors[0].set(-.9);
+	driveMotors[0].set(.9);
 	driveMotors[1].set(0);
 	
 	// Blocking call so this will wait until someone connects
