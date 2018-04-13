@@ -21,7 +21,7 @@
 #define KICKER_IN1 11
 #define KICKER_IN2 5
 
-#define DEADZONE 0.06
+#define DEADZONE 0.1
 
 int main(int argc, char **argv)
 {
