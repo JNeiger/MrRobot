@@ -57,20 +57,9 @@ PCA9685::PCA9685(uint8_t addr) {
 		printf("Error opening the i2c device with error %d\n\r", i2cHandle);
 	}
 	
-	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
-	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
-	
 	reset();
-	
-	
-	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
-	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
-	
 	// Set to 50 hz for normal motor operation
 	setPWMFreq(55);
-	
-	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
-	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
 }
 
 PCA9685::~PCA9685() {
@@ -106,9 +95,7 @@ void PCA9685::setPWMFreq(float freq) {
 	write8(PCA9685_PRESCALE, prescale); // Set the clock scale
 	write8(PCA9685_MODE1, oldmode);
 	time_sleep(.1);
-	write8(PCA9685_MODE1, 0x81); // Auto increment
-	time_sleep(.1);
-	write8(PCA9685_MODE1, 0x21); // Auto increment
+	write8(PCA9685_MODE1, 0xA1); // Auto increment
 	time_sleep(.1);
 }
 
