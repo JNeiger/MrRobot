@@ -38,11 +38,11 @@ void Motor::set(float percent) {
 	} else if (percent > 0) {
 		i1 = 1;
 		i2 = 0;
-		duty = percent / 2 + 0.5f;
+		duty = percent;
 	} else { // percent < 0
 		i1 = 0;
 		i2 = 1;
-		duty = percent / 2 + 0.5f;
+		duty = -percent;
 	}
 	
 	gpioWrite(IN1, i1);
