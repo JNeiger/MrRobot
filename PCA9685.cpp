@@ -119,13 +119,6 @@ void PCA9685::setPWM(uint8_t channel, uint16_t on, uint16_t off) {
 	i2cWriteByteData(i2cHandle, base+1, (unsigned char)(on >> 8));
 	i2cWriteByteData(i2cHandle, base+2, (unsigned char)off);
 	i2cWriteByteData(i2cHandle, base+3, (unsigned char)(off >> 8));
-	
-	printf("Reg Offset 0x%02x\n\r", PWM0_ON_L + 4*channel);
-	printf("LED_ON_L 0x%02x\n\r", read8(PWM0_ON_L + 4*channel));
-	printf("LED_ON_H 0x%02x\n\r", read8(PWM0_ON_L + 4*channel + 1));
-	printf("LED_OFF_L 0x%02x\n\r", read8(PWM0_ON_L + 4*channel + 2));
-	printf("LED_OFF_L 0x%02x\n\r", read8(PWM0_ON_L + 4*channel + 3));
-	printf("On %d\n\rOff %d\n\r", on, off);
 }
 
 // Reads 8 bits from a register
