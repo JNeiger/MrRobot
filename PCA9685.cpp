@@ -58,10 +58,11 @@ PCA9685::PCA9685(uint8_t addr) {
 	}
 	
 	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
+	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
 	
 	reset();
 	// Set to 50 hz for normal motor operation
-	setPWMFreq(50);
+	setPWMFreq(55);
 	
 	printf("State Register: %d\n\r", read8(PCA9685_MODE1));
 	printf("Prescale Register: %d\n\r", read8(PCA9685_PRESCALE));
