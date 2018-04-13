@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	Motor kicker(&extender, KICKER_PWM_CHANNEL, KICKER_IN1, KICKER_IN2);
 	
 	// Set the motors to 0 so they don't randomly start moving when you turn it on
-	driveMotors[0].set(0.9);
+	driveMotors[0].set(0.1);
 	driveMotors[1].set(0);
 	
 	// Blocking call so this will wait until someone connects
