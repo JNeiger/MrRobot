@@ -77,10 +77,10 @@ PCA9685::~PCA9685() {
 void PCA9685::reset() {
 	//write8(PCA9685_MODE1, 0x80);
 	if (read8(PCA9685_MODE1) & 0x80) {
-		write8(PCA9685_MODE1, 0x00);
+		write8(PCA9685_MODE1, 0x81);
 		time_sleep(0.01);
 	}
-	write8(PCA9685_MODE1, 0x80);
+	write8(PCA9685_MODE1, 0x81);
 	time_sleep(.010);
 }
 
