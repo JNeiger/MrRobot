@@ -69,6 +69,7 @@ void BluetoothServer::listenForClient() {
 	listen(me, 10); //10?
 	printf("Waiting for connections...\n\r");
 	them = accept(me, (struct sockaddr *)&addr, &alen);
+	printf("Accepted Client\n\r");
 }
 
 int BluetoothServer::readData(char* buffer, int len) {
