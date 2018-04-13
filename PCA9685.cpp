@@ -108,6 +108,8 @@ void PCA9685::setPWMFreq(float freq) {
 	time_sleep(.1);
 	write8(PCA9685_MODE1, 0x81); // Auto increment
 	time_sleep(.1);
+	write8(PCA9685_MODE1, 0x21); // Auto increment
+	time_sleep(.1);
 }
 
 // Sets a PWM channel to have a certain duty cycle
