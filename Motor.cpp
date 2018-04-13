@@ -45,8 +45,6 @@ void Motor::set(float percent) {
 		duty = percent / 2 + 0.5f;
 	}
 	
-	printf("Duty: %f\n\rI1 = %d\n\rI2 = %d\n\r", duty, i1, i2);
-	printf("IN1 Pin %d, IN2 Pin %d, Channel %d\n\r", IN1, IN2, channel);
 	gpioWrite(IN1, i1);
 	gpioWrite(IN2, i2);
 	extender->setPWM(channel, duty);
