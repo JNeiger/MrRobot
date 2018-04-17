@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 		//int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
 		//printf("Read %d bytes\n\r", bytes_read);
 		
-		bluetoothPacket.rX = 0;
+		bluetoothPacket.rX = 32;
 		bluetoothPacket.lY = 32;
 		
 		// Convert the axis input to the range -1 to 1 with a small deadzone
@@ -76,11 +76,6 @@ int main(int argc, char **argv)
 		float right_speed = std::max(-1.0f, std::min(1.0f, ly - rx));
 		
 		// When going backwards, it feels better when the controls are flipped
-		if (ly < 0) {
-			float temp = left_speed;
-			left_speed = right_speed;
-			right_speed = temp;
-		}
 		
 		driveMotors[0].set(left_speed);
 		driveMotors[1].set(right_speed);
