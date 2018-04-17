@@ -87,7 +87,7 @@ int main(int argc, char **argv)
 		
 		//Control the intake using the two triggers
 		// Left trigger goes backward, right trigger goes forward
-		intake.set(rt - lt);
+		//intake.set(rt - lt);
 		//printf("%-10.2f\n\r", rt - lt);
 		
 		// Y Button being pushed
