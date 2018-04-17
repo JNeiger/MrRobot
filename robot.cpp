@@ -5,19 +5,20 @@
 #include "PCA9685.hpp"
 #include "Motor.hpp"
 
-#define LEFT_DRIVE_PWM_CHANNEL 0
-#define LEFT_DRIVE_IN1 4
-#define LEFT_DRIVE_IN2 17
+// 4/17 27/22 10/9 11/5
+#define LEFT_DRIVE_PWM_CHANNEL 3
+#define LEFT_DRIVE_IN1 10
+#define LEFT_DRIVE_IN2 9
 
-#define RIGHT_DRIVE_PWM_CHANNEL 1
-#define RIGHT_DRIVE_IN1 27
-#define RIGHT_DRIVE_IN2 22
+#define RIGHT_DRIVE_PWM_CHANNEL 0
+#define RIGHT_DRIVE_IN1 4
+#define RIGHT_DRIVE_IN2 17
 
 #define INTAKE_PWM_CHANNEL 2
-#define INTAKE_IN1 10
-#define INTAKE_IN2 9
+#define INTAKE_IN1 27
+#define INTAKE_IN2 22
 
-#define KICKER_PWM_CHANNEL 3
+#define KICKER_PWM_CHANNEL 1
 #define KICKER_IN1 11
 #define KICKER_IN2 5
 
@@ -31,22 +32,24 @@ int main(int argc, char **argv)
 	Motor *driveMotors = (Motor*)malloc(2*sizeof(Motor));
 	driveMotors[0] = Motor(&extender, LEFT_DRIVE_PWM_CHANNEL,  LEFT_DRIVE_IN1,  LEFT_DRIVE_IN2);
 	driveMotors[1] = Motor(&extender, RIGHT_DRIVE_PWM_CHANNEL, RIGHT_DRIVE_IN1, RIGHT_DRIVE_IN2);
-	Motor intake(&extender, INTAKE_PWM_CHANNEL, INTAKE_IN1, INTAKE_IN2);
-	Motor kicker(&extender, KICKER_PWM_CHANNEL, KICKER_IN1, KICKER_IN2);
+	//Motor intake(&extender, INTAKE_PWM_CHANNEL, INTAKE_IN1, INTAKE_IN2);
+	//Motor kicker(&extender, KICKER_PWM_CHANNEL, KICKER_IN1, KICKER_IN2);
 	
 	// Set the motors to 0 so they don't randomly start moving when you turn it on
 	driveMotors[0].set(0);
 	driveMotors[1].set(0);
 	
 	// Blocking call so this will wait until someone connects
-	bt.listenForClient();
+	//bt.listenForClient();
 	
 	// Once we get a client connected, read the input data
 	// and do whatever we need to do based on that
 	while (true) {
 		// Read the controller data from bluetooth
-		int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
+		//int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
 		//printf("Read %d bytes\n\r", bytes_read);
+		
+		bluetoothPacket.lY = 32;
 		
 		// Convert the axis input to the range -1 to 1 with a small deadzone
 		// The max is needed since some of them are from -128 to 127
