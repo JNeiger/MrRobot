@@ -22,7 +22,10 @@
 #define KICKER_IN1 11
 #define KICKER_IN2 5
 
+// Out of 100%
 #define DEADZONE 0.1
+// Out of 100%
+#define MAX_SPEED 0.75f
 
 int main(int argc, char **argv)
 {
@@ -40,13 +43,13 @@ int main(int argc, char **argv)
 	driveMotors[1].set(0);
 	
 	// Blocking call so this will wait until someone connects
-	//bt.listenForClient();
+	bt.listenForClient();
 	
 	// Once we get a client connected, read the input data
 	// and do whatever we need to do based on that
 	while (true) {
 		// Read the controller data from bluetooth
-		//int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
+		int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
 		//printf("Read %d bytes\n\r", bytes_read);
 		
 		bluetoothPacket.rX = 32;
@@ -68,18 +71,24 @@ int main(int argc, char **argv)
 		lt *= (std::abs(lt) >= DEADZONE);
 		rt *= (std::abs(rt) >= DEADZONE);
 		
+		// Make sticks less sensitive
+		lx = lx*lx*lx;
+		ly = ly*ly*ly;
+		rx = rx*rx*rx;
+		ry = ry*ry*ry;
+		
 		// Use all the input from the controller
 		//printf("(%-10.2f, %-10.2f) (%-10.2f, %-10.2f) (%-10.2f, %-10.2f)\n\r", lx, ly, rx, ry, lt, rt);
 		
 		// Convert left and right stick arcade controls to tank drive
-		float left_speed  = std::max(-1.0f, std::min(1.0f, ly + rx));
-		float right_speed = std::max(-1.0f, std::min(1.0f, ly - rx));
+		float left_speed  = std::max(-1.0f, std::min(1.0f, ly + rx)) * MAX_SPEED;
+		float right_speed = std::max(-1.0f, std::min(1.0f, ly - rx)) * MAX_SPEED;
 		
 		// When going backwards, it feels better when the controls are flipped
 		
 		driveMotors[0].set(left_speed);
 		driveMotors[1].set(right_speed);
-		printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
+		//printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
 		
 		//Control the intake using the two triggers
 		// Left trigger goes backward, right trigger goes forward
