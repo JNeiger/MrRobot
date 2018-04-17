@@ -27,18 +27,18 @@
 //Mirror of the packet in windows
 struct bt_packet{
 	// Left/Right Trigger
-	unsigned char lT;
-	unsigned char rT;
+	unsigned char lT = 0;
+	unsigned char rT = 0;
 	
 	//Left/Right X/Y axis
-	char lX;
-	char lY;
-	char rX;
-	char rY;
+	char lX = 0;
+	char lY = 0;
+	char rX = 0;
+	char rY = 0;
 	
 	// Lower/Upper Buttons
-	unsigned char lB;
-	unsigned char uB;
+	unsigned char lB = 0;
+	unsigned char uB = 0;
 };
 
 class BluetoothServer {
