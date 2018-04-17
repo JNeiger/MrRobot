@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 		//int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
 		//printf("Read %d bytes\n\r", bytes_read);
 		
-		bluetoothPacket.rx = 0;
+		bluetoothPacket.rX = 0;
 		bluetoothPacket.lY = 32;
 		
 		// Convert the axis input to the range -1 to 1 with a small deadzone
