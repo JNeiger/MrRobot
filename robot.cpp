@@ -49,6 +49,7 @@ int main(int argc, char **argv)
 		//int bytes_read = bt.readData((char*)&bluetoothPacket, sizeof(struct bt_packet));
 		//printf("Read %d bytes\n\r", bytes_read);
 		
+		bluetoothPacket.rx = 0;
 		bluetoothPacket.lY = 32;
 		
 		// Convert the axis input to the range -1 to 1 with a small deadzone
@@ -83,7 +84,7 @@ int main(int argc, char **argv)
 		
 		driveMotors[0].set(left_speed);
 		driveMotors[1].set(right_speed);
-		//printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
+		printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
 		
 		//Control the intake using the two triggers
 		// Left trigger goes backward, right trigger goes forward
