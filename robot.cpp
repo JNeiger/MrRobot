@@ -72,10 +72,10 @@ int main(int argc, char **argv)
 		rt *= (std::abs(rt) >= DEADZONE);
 		
 		// Make sticks less sensitive
-		lx = lx*lx*lx;
-		ly = ly*ly*ly;
-		rx = rx*rx*rx;
-		ry = ry*ry*ry;
+		//lx = lx*lx*lx;
+		//ly = ly*ly*ly;
+		//rx = rx*rx*rx;
+		//ry = ry*ry*ry;
 		
 		// Use all the input from the controller
 		//printf("(%-10.2f, %-10.2f) (%-10.2f, %-10.2f) (%-10.2f, %-10.2f)\n\r", lx, ly, rx, ry, lt, rt);
