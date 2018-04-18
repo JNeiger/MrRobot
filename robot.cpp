@@ -88,7 +88,7 @@ int main(int argc, char **argv)
 		
 		driveMotors[0].set(left_speed);
 		driveMotors[1].set(right_speed);
-		//printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
+		printf("%-10.2f %-10.2f\n\r", left_speed, right_speed);
 		
 		//Control the intake using the two triggers
 		// Left trigger goes backward, right trigger goes forward
