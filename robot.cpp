@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 	// Turns on for MAX_ON_CNT cycles, then off for at least MIN_OFF_CNT cycles
 	int onCtr = 0;
 	int offCtr = 0;
-	bool kickOn = false;
+	bool kickerOn = false;
 	
 	// Set the motors to 0 so they don't randomly start moving when you turn it on
 	driveMotors[0].set(0);
