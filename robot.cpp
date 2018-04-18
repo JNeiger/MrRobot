@@ -25,7 +25,7 @@
 // Out of 100%
 #define DEADZONE 0.1
 // Out of 100%
-#define MAX_SPEED 0.75f
+#define MAX_SPEED 1.00f
 
 int main(int argc, char **argv)
 {
@@ -67,12 +67,6 @@ int main(int argc, char **argv)
 		ry *= (std::abs(ry) >= DEADZONE);
 		lt *= (std::abs(lt) >= DEADZONE);
 		rt *= (std::abs(rt) >= DEADZONE);
-		
-		// Make sticks less sensitive
-		//lx = lx*lx*lx;
-		//ly = ly*ly*ly;
-		//rx = rx*rx*rx;
-		//ry = ry*ry*ry;
 		
 		// Use all the input from the controller
 		//printf("(%-10.2f, %-10.2f) (%-10.2f, %-10.2f) (%-10.2f, %-10.2f)\n\r", lx, ly, rx, ry, lt, rt);
