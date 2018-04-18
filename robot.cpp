@@ -27,16 +27,31 @@
 // Out of 100%
 #define MAX_SPEED 1.00f
 
+// Max number of while loops cycles the solinoid can stay on in a row
+// Each while loop executes every ~50 ms
+// 10 while loops is about ~500 ms
+#define MAX_ON_CNT 10
+// Min number of while loops cycles the solinoid must stay off to cool down
+// Each while loop executes every ~50 ms
+// 30 while loops is about ~1.5 secs
+#define MIN_OFF_CNT 30
+
 int main(int argc, char **argv)
 {
 	BluetoothServer bt;
 	struct bt_packet bluetoothPacket;
 	PCA9685 extender;
-	Motor *driveMotors = (Motor*)malloc(2*sizeof(Motor));
+	Motor *driveMotors = (Motor*)malloc(2*sizeof(Motor));	
 	driveMotors[0] = Motor(&extender, LEFT_DRIVE_PWM_CHANNEL,  LEFT_DRIVE_IN1,  LEFT_DRIVE_IN2);
 	driveMotors[1] = Motor(&extender, RIGHT_DRIVE_PWM_CHANNEL, RIGHT_DRIVE_IN1, RIGHT_DRIVE_IN2);
 	//Motor intake(&extender, INTAKE_PWM_CHANNEL, INTAKE_IN1, INTAKE_IN2);
 	//Motor kicker(&extender, KICKER_PWM_CHANNEL, KICKER_IN1, KICKER_IN2);
+	
+	// Controls the timeout for the solinoid
+	// Turns on for MAX_ON_CNT cycles, then off for at least MIN_OFF_CNT cycles
+	int onCtr = 0;
+	int offCtr = 0;
+	bool kickOn = false;
 	
 	// Set the motors to 0 so they don't randomly start moving when you turn it on
 	driveMotors[0].set(0);
@@ -103,7 +118,23 @@ int main(int argc, char **argv)
 		
 		// A Button being pushed
 		if ((bluetoothPacket.uB & A) != 0) {
-			printf("A Button being pushed\n\r");
+			//printf("A Button being pushed\n\r");
+			kickerOn = true;
+		}
+		
+		if (kickerOn && onCtr < MAX_ON_CNT) {
+			//kicker.set(1.0f);
+			onCtr++;
+			printf("Kicker On %d\n\r",  onCtr);
+		} else if (kickerOn && onCtr >= MAX_ON_CNT && offCtr < MIN_OFF_CNT) {
+			//kicker.set(0.0f);
+			printf("Kicker Off %d\n\r",  offCtr);
+			offCtr++;
+		} else if (kickerOn) {
+			printf("Ready for another Kick\n\r");
+			kickerOn = false;
+			onCtr = 0;
+			offCtr = 0;
 		}
 		
 		// RB Button being pushed
