@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 	Motor *driveMotors = (Motor*)malloc(2*sizeof(Motor));	
 	driveMotors[0] = Motor(&extender, LEFT_DRIVE_PWM_CHANNEL,  LEFT_DRIVE_IN1,  LEFT_DRIVE_IN2);
 	driveMotors[1] = Motor(&extender, RIGHT_DRIVE_PWM_CHANNEL, RIGHT_DRIVE_IN1, RIGHT_DRIVE_IN2);
-	//Motor intake(&extender, INTAKE_PWM_CHANNEL, INTAKE_IN1, INTAKE_IN2);
+	Motor intake(&extender, INTAKE_PWM_CHANNEL, INTAKE_IN1, INTAKE_IN2);
 	Motor kicker(&extender, KICKER_PWM_CHANNEL, KICKER_IN1, KICKER_IN2);
 	
 	// Controls the timeout for the solinoid
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
 		
 		//Control the intake using the two triggers
 		// Left trigger goes backward, right trigger goes forward
-		//intake.set(rt - lt);
+		intake.set(rt - lt);
 		//printf("%-10.2f\n\r", rt - lt);
 		
 		// Y Button being pushed
